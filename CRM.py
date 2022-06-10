@@ -65,6 +65,18 @@ def clear_fields():
 	price_paid_box.delete(0, END)
 
 # Submit Customer To Database
+def add_customer():
+	sql_command = "INSERT INTO customers (first_name, last_name, zipcode, price_paid, email, address_1, address_2, city, state, country, phone, payment_method, discount_code) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+	# %s is just a wild card entry we can susbtiute any value. We give a tuple of all the required values
+	# Values
+	values = (first_name_box.get(), last_name_box.get(), zipcode_box.get(), price_paid_box.get(), email_box.get(), address1_box.get(), address2_box.get(), city_box.get(), state_box.get(), country_box.get(), phone_box.get(), payment_method_box.get(), discount_code_box.get())
+	# Syntax if we use placeholders
+	my_cursor.execute(sql_command, values)
+
+	# Commit the changes to the database
+	mydb.commit()
+	# Clear the fields
+	clear_fields()
 
 
 # Write To CSV Excel Function
